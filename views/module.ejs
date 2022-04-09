@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <%- include('partials/navbarAdmin') %>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow rounded text-center mt-5 mb-5">
+            <div class="card header">Add Module</div>
+
+            <div class="card-body">
+              <form action="/add-module" method="POST">
+                <div class="container">
+                  <input
+                    type="number"
+                    name="moduleTraining"
+                    placeholder="moduleTraining"
+                    class="form-control"
+                  />
+                  <br />
+                  <input
+                    type="text"
+                    name="moduleTiltle"
+                    placeholder="Module Title"
+                    class="form-control"
+                  />
+                  <br />
+                  <textarea
+                    name="moduleDescription"
+                    placeholder="Module Description"
+                    class="form-control"
+                  ></textarea>
+                  <br />
+                  <input
+                    type="number"
+                    name="modulePrice"
+                    placeholder="Enter Price"
+                    class="form-control"
+                  />
+                  <br />
+                  <input
+                    type="submit"
+                    value="Add Module"
+                    class="btn btn-primary"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+  <%- include('partials/footer') %>
+</html>

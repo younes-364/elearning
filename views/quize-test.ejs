@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+
+  <body>
+    <!--navbar-->
+    <%- include('partials/navbar') %> <% if(questionsModule.length == 0 ){%>
+    <h1 class="text-center font-italic mt-5">
+      This Module Dosn't Have Any Questions
+    </h1>
+    <%} else{%>
+
+    <h3 class="text-center mt-5 font-italic">
+      Introductin To Networks (Version 6.00) -TN.Exam ( <%=
+      questionsModule[0].MODULE_TITLE %> )
+    </h3>
+
+    <div class="container container mt-5 mb-5">
+      <div class="card shadow rounder p-3 pb-3 mb-5 card-text">
+        <h6>
+          <span class="text-danger">NB: </span> This Little Exam Is For You
+          Training On General Exam Maybe You Going To Found Some Questions
+          Repeted In The General Exam So Please Remember The Correct Answer And
+          Give Your Attention To Find Your Final Exam Easy . We Will Give You a
+          One Quastion If You Answer Right You Will See a Success Message , If
+          You Don't You Will See a danger Message Good Luck !! .
+        </h6>
+      </div>
+      <% if(!message.isEmpty){ %>
+      <div class="mb-4 alert-success text-center rounded"><%= message %></div>
+      <%}%> <% if(errors != null){%>
+      <div class="mb-4 alert-danger text-center rounded"><%= errors %></div>
+      <%}%> <% questionsModule.forEach(function(que){ %>
+      <form action="/question-answer/<%= que.QUESTION_ID %>" method="POST">
+        <ul class="list-group">
+          <li class="list-group-item active">
+            <h6><%= que.QUESTION_TEXT %></h6>
+          </li>
+          <li class="list-group-item">
+            <label>
+              <input
+                type="radio"
+                name="choice"
+                value="<%= que.QUESTION_FIRST_CHOICE %>"
+              />
+              <%= que.QUESTION_FIRST_CHOICE %>
+            </label>
+          </li>
+          <li class="list-group-item">
+            <label>
+              <input
+                type="radio"
+                name="choice"
+                value="<%= que.QUESTION_SECOND_CHOICE %>"
+              />
+              <%= que.QUESTION_SECOND_CHOICE %>
+            </label>
+          </li>
+          <li class="list-group-item">
+            <label>
+              <input
+                type="radio"
+                name="choice"
+                value="<%= que.QUESTION_THIRD_CHOICE %>"
+              />
+              <%= que.QUESTION_THIRD_CHOICE %>
+            </label>
+          </li>
+        </ul>
+
+        <input type="submit" value="Send" class="btn-success d-flex" />
+      </form>
+      <%});%>
+    </div>
+
+    <%}%> <%- include('partials/javascript') %>
+  </body>
+</html>

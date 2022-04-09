@@ -1,0 +1,163 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+    <style>
+      body {
+        background-image: url(/images/bk3.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="navbar-brand fas fa-user-plus" href="/register"
+              >Registre</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <br />
+
+    <!--card login-->
+    <div class="container pb-5">
+      <div class="row">
+        <!--first column-->
+
+        <div class="col-7 mt-5 position-buttom">
+          <div
+            class="card font-italic"
+            style="
+              margin-top: 200px;
+              background-color: rgba(100, 100, 300, 0.7);
+            "
+          >
+            <div class="card-body shadow rounded">
+              <h4 class="card-header text-light">
+                Advantages Subscription Cours
+              </h4>
+
+              <p class="card-text text-white">
+                In this Platform you going to find All cours you need Best
+                prices for all Trainings you need We have a best team who
+                overseeing improvement and rendering the best services you need
+                Secure personel informations
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--second column-->
+        <div class="col-5">
+          <div
+            class="card shadow rounded-0 position-right"
+            style="width: 30rem; background-color: rgba(100, 100, 100, 0.7)"
+          >
+            <div class="card-header bg-primary text-center text-white">
+              <h4>Login Here</h4>
+            </div>
+            <div class="card-body">
+              <form action="/test-login" method="POST">
+                <div class="form-group">
+                  <!--throw an error -->
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <% if(errors != null){ %>
+                        <div
+                          style="height: 25px"
+                          class="
+                            pt-1
+                            alert-danger
+                            text-center
+                            rounded
+                            fas
+                            fa-exclamation-circle
+                          "
+                        >
+                          <%= errors %>
+                        </div>
+                        <br />
+                        <%}%> <% if(error2 != null){ %>
+                        <div
+                          style="height: 25px"
+                          class="
+                            pt-1
+                            alert-danger
+                            text-center
+                            rounded
+                            fas
+                            fa-exclamation-circle
+                          "
+                        >
+                          <%= error2 %>
+                        </div>
+                        <br />
+                        <%}%>
+                      </div>
+                    </div>
+                  </div>
+
+                  <label for="exampleInputEmail1" class="text-white"
+                    >Email address</label
+                  >
+
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                  />
+                  <small id="emailHelp" class="form-text text-muted">
+                    We'll never share your email with anyone else.</small
+                  >
+                </div>
+
+                <div class="form-group text-white">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <div class="form-group form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label class="form-check-label text-white" for="exampleCheck1"
+                    >Check me out</label
+                  >
+                </div>
+
+                <div class="card card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+  <br />
+  <%- include('partials/footer') %>
+</html>

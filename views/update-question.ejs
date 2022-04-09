@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+  <body>
+    <!--navbar-->
+    <%- include('partials/navbarAdmin') %>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow rounded text-center mt-5 mb-5">
+            <div class="card header">Update Module</div>
+
+            <div class="card-body">
+              <form action="/update-question" method="POST">
+                <div class="form-group">
+                  <input
+                    type="hidden"
+                    name="capsuleId"
+                    value="<%= dataQuestion[0].QUESTION_ID %>"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataQuestion[0].QUESTION_TEXT %>"
+                    name="questionText"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataQuestion[0].QUESTION_FIRST_CHOICE %>"
+                    name="firstChoice"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataQuestion[0].QUESTION_SECOND_CHOICE %>"
+                    name="secondChoice"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataQuestion[0].QUESTION_THIRD_CHOICE %>"
+                    name="thirdChoice"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataQuestion[0].QUESTION_CORRECT_CHOICE %>"
+                    name="correctChoice"
+                  />
+
+                  <select name="hardnessLevel" class="form-control mb-3">
+                    <option value="BASIC">BASIC</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="HEIGH">HEIGH</option>
+                  </select>
+
+                  <input
+                    class="btn btn-primary rounded"
+                    type="submit"
+                    value="Update Question"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript')%>
+  </body>
+</html>

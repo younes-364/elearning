@@ -1,0 +1,191 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(/images/bk62.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li:nth-child(odd) {
+            background: rgb(34, 99, 110);
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <!--nav bar-->
+
+    <%- include('partials/navbar') %>
+
+    <!--general card part -->
+
+    <div class="row">
+
+        <div class="col-8 mt-5">
+
+            <div class="container mb-5">
+
+                <div class="card text-italic text-white shadow rounded"
+                    style="background-color: rgba(107, 107, 107, 0.3);">
+                    <div class="card-header bg-primary">
+                        <h5>Respectable Rules</h5>
+                    </div>
+
+                    <!--list respectable rules-->
+                    <div class="card-body card-text">
+                        <li class="item">This Page is for changing informations between students and
+                            members group.</li>
+                        <li class="item">If you have a question please ask your question in the area.
+                        </li>
+                        <li class="item">General purpase of this Item is comunication.</li>
+                        <li class="item"> please respect the group members and always search for a
+                            good
+                            comminication.</li>
+                        <li class="item"> when you send a message all the members group going to
+                            receive
+                            your message
+                            so be carefull in your conversations, have a great day :)</li>
+                    </div>
+                </div>
+
+
+                <br />
+                <!--three cards-->
+                <div class="row mt-5">
+                    <!--first cards-->
+                    <div class="col-3">
+
+                        <div class="card bg-white shadow mb-3" style="max-width: 18rem;height: 200px;">
+                            <div class="card-body">
+                                <h1 class="text-center"><i class="fas fa-users"></i></h1>
+                                <li class="item">Best Team</li>
+                                <li class="item">Best Services</li>
+                                <li class="item">Best Students</li>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-1 mt-5 mw-100">
+                        <h1 class="text-white"> <i class="fas fa-plus mt-3"></i></h1>
+                    </div>
+
+                    <!--second cards-->
+                    <div class="col-3">
+
+                        <div class="card bg-white shadow mb-3 " style="max-width: 18rem;height: 200px;">
+                            <div class="card-body ">
+                                <h1 class="text-center"><i class="far fa-comments"></i></h1>
+                                <li class="item">Respect Members</li>
+                                <li class="item">Usefull Words</li>
+                                <li class="item">Perpuse</li>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-1 mt-5">
+                        <h1 class="text-white"> <i class="fas fa-equals mt-3"></i> </h1>
+                    </div>
+
+                    <!--third cards-->
+                    <div class="col-3">
+                        <div class="card bg-white mb-3 shadow" style="width: 14rem;height: 200px;">
+                            <div class="card-body font-italic">
+                                <h1 class="text-center"><i class="far fa-lightbulb"></i></h1>
+                                <li class="item">Good Conversation</li>
+                                <li class="item">Solved Problems</li>
+                                <li class="item">Confidential Member</li>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 mt-5 mb-5 position-fixed" style="right: 0;top: 0;">
+            <div class="card overflow-auto shadow mt-0 mb-0 pb-0 pt-0" style="width: 26rem;height: 650px;
+                background-color: rgba(1, 64, 100, 0.8)" >
+                <div class="card-header bg-primary" >
+                    <h5 class="text-white">Contact Area</h5>
+                </div>
+                <!--mesage part body-->
+                <div class="card-body text-white">
+                    <h5>Messages Found Here</h5>
+                    <ul id="messages"></ul>
+                </div>
+                <!--traiter input and button send-->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button onclick="send()" class="btn btn-outline-primary position-fixed" type="button"
+                            style="right:45;bottom: 20;">
+                            Send
+                        </button>
+                    </div>
+                    <input id="m" type="text" class="form-control position-fixed" placeholder="enter a message"
+                        style="margin-left: 10;width: 320;bottom: 20;" >
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--include js fies-->
+
+    <%- include('partials/javascript') %>
+
+    <!--configure part socket io-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        var socket = io();
+
+        var send = function () {
+            var text = document.getElementById('m').value;
+            socket.emit('chat message', text);
+        }
+
+        var receive = function (msg) {
+            var li = document.createElement('li');
+            li.innerText = msg;
+            document.getElementById('messages').appendChild(li);
+        }
+
+        socket.on('chat message', receive);
+
+    </script>
+
+
+</body>
+
+</html>

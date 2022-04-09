@@ -1,0 +1,226 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/stylesheet') %>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!--nav bar-->
+    <%- include('partials/navbarAdmin') %>
+
+    <div class="container mt-5 mb-5">
+      <h1 class="font-italic text-black text-center uppercase-text mt-5">
+        Manage Page
+      </h1>
+
+      <div class="card text-center text-black font-italic pl-3 pr-3 mt-5 mb-5">
+        <div class="card-body">
+          <p>
+            <span class="text-danger card-text">NB: </span> Please be carefull
+            when you want to delete or update an item, because if this item had
+            a foreign key with an other table is not gonna be deleted or
+            updated.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 mb-5">
+          <ul class="list-group">
+            <li class="list-group-item active text-center">Remove Item</li>
+
+            <li class="list-group-item">
+              <form action="/remove-training" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="trainingId"
+                      placeholder="Enter id Training Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      value="Remove Training"
+                      class="btn btn-danger"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+
+            <li class="list-group-item">
+              <form action="/remove-module" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="moduleId"
+                      placeholder="Enter id Module Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      class="btn btn-danger"
+                      value="Remove Module"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li class="list-group-item">
+              <form action="/remove-capsule" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="capsuleId"
+                      placeholder="Enter id Capsule Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      class="btn btn-danger"
+                      value="Remove Capsule"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li class="list-group-item">
+              <form action="/remove-question" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="quastionId"
+                      placeholder="Enter id Question Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      class="btn btn-danger"
+                      value="Remove Question"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-6 mt-3 mb-5">
+          <ul class="list-group">
+            <li class="list-group-item active text-center">Update Item</li>
+
+            <li class="list-group-item">
+              <form action="/get-update-training" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="trainingId"
+                      placeholder="Enter id Training Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      class="btn btn-success"
+                      value="Update Training"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+
+            <li class="list-group-item">
+              <form action="/get-update-module" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="moduleId"
+                      placeholder="Enter id Module Please"
+                    />
+                  </div>
+
+                  <div class="col-6">
+                    <input
+                      type="submit"
+                      class="btn btn-success"
+                      value="Update Module"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li class="list-group-item">
+              <form action="/get-update-capsule" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="capsuleId"
+                      placeholder="Enter id Capsule Please"
+                    />
+                  </div>
+
+                  <div class="col-6">
+                    <input
+                      type="submit"
+                      class="btn btn-success"
+                      value="Update Capsule"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li class="list-group-item">
+              <form action="/get-update-question" method="post">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="quastionId"
+                      placeholder="Enter id Question Please"
+                    />
+                  </div>
+
+                  <div class="col-4">
+                    <input
+                      type="submit"
+                      class="btn btn-success"
+                      value="Update Question"
+                    />
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+</html>

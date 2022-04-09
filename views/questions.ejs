@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <%- include('partials/navbarAdmin');%>
+
+    <!--card-->
+    <div class="container mt-5 mb-5">
+      <div class="card shadow rounded" style="width: 70rem">
+        <div class="card-header text-center">Add Questions</div>
+        <div class="card-body">
+          <form action="/add-questions" method="POST">
+            <input
+              type="number"
+              name="questionModule"
+              placeholder="Enter The Module Of Question"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+            <input
+              type="text"
+              name="questionTexte"
+              placeholder="Enter The Question Texte"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+            <input
+              type="text"
+              name="firstChoice"
+              placeholder="Enter First Choice"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+            <input
+              type="text"
+              name="secondChoice"
+              placeholder="Enter Second Choice"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+            <input
+              type="text"
+              name="thirdChoice"
+              placeholder="Enter Third Choice"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+
+            <input
+              type="text"
+              name="correctChoice"
+              placeholder="Enter Correct Choice"
+              class="border border-info rounded-pill form-control"
+            />
+            <br />
+
+            <select
+              name="hardnessLevel"
+              class="border border-info rounded-pill form-control"
+            >
+              <option value="LOW">LOW</option>
+              <option value="MEDIUM">MEDIUM</option>
+              <option value="HEIGH">HEIGH</option>
+            </select>
+
+            <div class="card card-footer">
+              <input
+                type="submit"
+                value="Add Question"
+                class="btn-primary border rounded-pill form-control"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+  <%- include('partials/footer');%>
+</html>

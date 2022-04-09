@@ -1,0 +1,105 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+    <style>
+        body{
+            background-image: url(/images/bk8.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!--nav bar-->
+
+    <%- include('partials/navbar'); %>
+
+    <br />
+    <div class="container mb-5 mt-5">
+        <div class="row">
+
+            <div class="col-6 mt-5">
+                <!--second parrt-->
+                <div class="row">
+                    <div class="card shadow text-white" style="background-color:rgba(0,0,0,0.4);"">
+                        <div class="card-body font-italic">
+                          In this Item you can verify and update your Informations
+                          If you want to change your informations enter a valide new 
+                          informations and click update Informations to validate.
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+
+                <!--part form-->
+
+                <div class="card shadow rounded-0" style="width: 35rem;background-color:rgba(0,0,0,0.4);">
+                    <div class="card-header bg-light">
+                        <h3 class="card-title text-center">Personnel Informations</h3>
+                    </div>
+
+                    <form action="/update-profile/<%= userInfos.USER_ID %>" method="POST">
+                        <div class="card-body">
+
+                            <input type="hidden" name="id" value="<%= userInfos.USER_ID %>" />
+                            <br />
+                            <input type="text" name="firstName" value="<%= userInfos.USER_FIRST_NAME %>"
+                                class="border border-info rounded-pill  form-control">
+                            <br />
+                            <input type="text" name="lastName" value="<%= userInfos.USER_LAST_NAME %>"
+                                class="border border-info rounded-pill  form-control">
+                            <br />
+                            <input type="text" name="email" value="<%= userInfos.USER_EMAIL %>"
+                                class="border border-info rounded-pill  form-control">
+                            <br />
+                            <input type="password" name="password" value="<%= userInfos.USER_PASSWORD %>"
+                                class="border border-info rounded-pill form-control">
+                            <br />
+                            <select name="country" class="border border-info rounded-pill form-control">
+                                <option value="MAROC">MAROC</option>
+                                <option value="FRANCE">FRANCE</option>
+                                <option value="BRESIL">BRASIL</option>
+                                <option value="US">US</option>
+                            </select>
+                            <br />
+                            <select name="technicalLevel" class="border border-info rounded-pill form-control">
+                                <option value="basicevel">BASIC LEVEL</option>
+                                <option value="mediumLevel">MEDIUM EVEL</option>
+                                <option value="expertLevel">EXPERT LEVEL</option>
+                            </select>
+                        </div>
+
+                        <div class="card-footer">
+                            <input type="submit" value="Update Informations"
+                                class="btn-success border border-info rounded-pill form-control" />
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <%- include('partials/javascript') %>
+</body>
+<%- include('partials/footer') %>
+
+</html>

@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <%- include('partials/navbarAdmin') %>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow rounded text-center mt-5 mb-5">
+            <div class="card header">Add Capsule</div>
+
+            <div class="card-body">
+              <form action="/add-capsule" method="POST">
+                <input
+                  type="number"
+                  name="capsuleModule"
+                  class="form-control border border-info"
+                  placeholder="Enter Number Of Module This Capsule Join"
+                />
+                <br />
+                <input
+                  type="text"
+                  name="capsuleUrl"
+                  class="form-control border border-info"
+                  placeholder="Enter Url Of Video You Want To add "
+                />
+                <br />
+                <input
+                  type="submit"
+                  value="Add Capsule"
+                  class="form-control btn-success"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+  <%- include('partials/footer') %>
+</html>

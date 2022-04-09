@@ -1,0 +1,126 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+
+    <style>
+      body {
+        background-image: url(/images/bk64.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <%- include('partials/navbar') %>
+
+    <!--CARD TRAINING -->
+
+    <% if(training == undefined){%>
+    <h1 class="text-center text-white mt-5">
+      This Training Doesn't Have Any Modules To Show.
+    </h1>
+    <%}else{%>
+
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col-8 text-white">
+          <h5>Total Of Modules</h5>
+        </div>
+
+        <div class="col-4 text-white">
+          <h5>Training Details</h5>
+        </div>
+
+        <div class="col-8">
+          <!--part table-->
+          <table class="table shadow rounded text-white">
+            <thead class="thead bg-primary text-white">
+              <tr>
+                <th scope="col">Module N°</th>
+                <th scope="col">Module Title</th>
+                <th scope="col">Module Description</th>
+                <th scope="col">Module Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% module.forEach(function(mod){ %>
+              <tr>
+                <th scope="row"><%= mod.MODULE_ID %></th>
+                <th scope="row"><%= mod.MODULE_TITLE %></th>
+                <th scope="row"><%= mod.MODULE_DESCRIPTION %></th>
+                <th scope="row"><%= mod.MODULE_PRICE %> USD</th>
+                <th>
+                  <a
+                    type="button"
+                    href="/capsuleModule/<%= mod.MODULE_ID %>/<%= id_user %>"
+                    class="btn btn-primary"
+                  >
+                    Demarer
+                  </a>
+                </th>
+              </tr>
+              <%});%>
+            </tbody>
+          </table>
+          <!--part quiz-->
+
+          <div class="container">
+            <div class="card shadow-lg rounded" style="width: 40rem">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-8">
+                    <a
+                      type="button"
+                      href="/getExamFinal/<%= training.TRAINING_ID %>/<%= id_user %>"
+                      class="btn btn-primary"
+                    >
+                      General Exam
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a
+                      type="button"
+                      href="/showResultExam/<%= id_user %>/<%= training.TRAINING_ID %>"
+                      class="btn btn-success"
+                    >
+                      Consult Result
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--training card-->
+
+        <div class="col-4 pb-5">
+          <div class="card shadow-lg rounded" style="width: 18rem">
+            <div class="card-header bg-primary text-white">
+              <h2 class="card-title"><%= training.TRAINING_TITLE %></h2>
+            </div>
+            <img
+              src="/images/img<%= training.TRAINING_ID %>.png"
+              class="card-img-top img-thumbnail"
+            />
+            <div class="card-body">
+              <p class="card-text">
+                <strong><%= training.TRAINING_DESCRIPTION %></strong>
+              </p>
+              <p class="card-text"><%= training.length %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%}%> <%- include('partials/javascript') %>
+  </body>
+  <%- include('partials/footer') %>
+</html>

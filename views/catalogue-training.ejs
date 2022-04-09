@@ -1,0 +1,77 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+
+  <style>
+    body {
+      background-image: url(/images/bk63.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+
+  <body>
+    <!--nav bar-->
+
+    <%- include('partials/navbar') %>
+
+    <!--form-->
+    <!--cards-->
+
+    <% cmp=2;%>
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <% allTrainings.forEach(function(tra){%>
+        <form
+          action="/add-sub/<%= id_user %>/<%= tra.TRAINING_ID %>"
+          method="post"
+        >
+          <% cmp++;%>
+          <div class="col-4">
+            <input
+              type="hidden"
+              name="subTraining"
+              value="<%=tra.TRAINING_ID %>"
+            />
+            <div
+              class="card shadow bg-warning text-sm-center rounded"
+              style="width: 21rem; height: 470px"
+            >
+              <div class="text-white card header bg-dark">
+                <h4 class="card-title text-sm-center">
+                  <%= tra.TRAINING_TITLE %>
+                </h4>
+              </div>
+              <div class="card-body">
+                <img
+                  src="/images/img<%=tra.TRAINING_ID %>.png"
+                  class="card-img-top"
+                  height="200px"
+                />
+                <!-- <p><%= tra.TRAINING_ID %></p> -->
+                <h6 class="card-text text-black font-italic pt-4">
+                  <%= tra.TRAINING_DESCRIPTION %>
+                </h6>
+              </div>
+              <div class="card-footer bg-dark">
+                <input type="submit" class="btn-light" value="Subscribe" />
+              </div>
+            </div>
+            <%if(cmp % 3 == 0){%>
+            <br /><br />
+            <%}%>
+          </div>
+        </form>
+        <%});%>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+  <%- include('partials/footer') %>
+</html>

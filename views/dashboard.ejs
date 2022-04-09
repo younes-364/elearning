@@ -1,0 +1,219 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/stylesheet') %>
+
+    <title>Document</title>
+    <style>
+      body {
+        background-image: url(/images/bk10.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: right;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--nav bar-->
+    <%- include('partials/navbar') %>
+
+    <!--table-->
+
+    <div class="container mb-5 mt-5">
+      <h2 class="text-black mb-5 pt-3 font-italic text-uppercase text-center">
+        Statistics Elearning Plateform
+      </h2>
+
+      <!--Statistics-->
+
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-6">
+            <div id="moduleParTraining"></div>
+          </div>
+
+          <div class="col-6">
+            <div id="usersPerMonth"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--three cards-->
+
+      <div class="row mb-3">
+        <div class="col-4">
+          <!--first-->
+          <div id="usersPerMonth2"></div>
+        </div>
+
+        <!--second-->
+        <div class="col-4">
+          <!--first-->
+          <div id="usersPerMonth3"></div>
+        </div>
+
+        <!--third-->
+        <div class="col-4">
+          <!--first-->
+          <div id="usersPerMonth4"></div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+
+    <!--par plotly-->
+
+    <script>
+      //first chart
+      var trainingData = [
+        {
+          x: ["<%= statisticsItems[0].TRAINING_TITLE %>"],
+          //'
+          y: ["<%= statisticsItems[0].MODULE_NUMBER %>"],
+          type: "bar",
+
+          marker: {
+            color: "red",
+            opacity: 0.7,
+          },
+        },
+      ];
+
+      var trainingLayout = {
+        xaxis: { title: "Trainings" },
+        yaxis: { title: "Modules" },
+        barmode: "relative",
+        title: "Module Par Training",
+      };
+
+      Plotly.newPlot("moduleParTraining", trainingData, trainingLayout);
+
+      //second chart
+
+      var usersChartData = [
+        {
+          x: [
+            "Junary",
+            "Febrary",
+            "March",
+            "April",
+            "May",
+            "June",
+            "Joly",
+            "Aguest",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          y: [
+            "<%= usersChart.length %>",
+            52,
+            40,
+            70,
+            10,
+            120,
+            14,
+            70,
+            54,
+            70,
+            47,
+            15,
+          ],
+          type: "line",
+
+          marker: {
+            color: "blue",
+            opacity: 0.7,
+          },
+        },
+      ];
+
+      var usersChartLayout = {
+        xaxis: { title: "Months" },
+        yaxis: { title: "Users" },
+        barmode: "relative",
+        title: "Users Subscription Per Month",
+      };
+
+      Plotly.newPlot("usersPerMonth", usersChartData, usersChartLayout);
+
+      //third chart
+
+      var usersChartData2 = [
+        {
+          values: [52, 40, 70, 120],
+          labels: ["Junary", "Febrary", "March", "April"],
+          type: "pie",
+
+          marker: {
+            color: "green",
+            opacity: 0.7,
+          },
+        },
+      ];
+
+      var usersChartLayout2 = {
+        xaxis: { title: "Months" },
+        yaxis: { title: "Users" },
+        barmode: "relative",
+        title: "Users Subscription Per Month",
+      };
+
+      Plotly.newPlot("usersPerMonth2", usersChartData2, usersChartLayout2);
+
+      //fourth chart
+
+      var usersChartData3 = [
+        {
+          values: [52, 40, 70, 120],
+          labels: ["Junary", "Febrary", "March", "April"],
+          type: "pie",
+
+          marker: {
+            color: "green",
+            opacity: 0.7,
+          },
+        },
+      ];
+
+      var usersChartLayout3 = {
+        xaxis: { title: "Months" },
+        yaxis: { title: "Users" },
+        barmode: "relative",
+        title: "Users Subscription Per Month",
+      };
+
+      Plotly.newPlot("usersPerMonth3", usersChartData3, usersChartLayout3);
+
+      //fifth chart
+
+      var usersChartData4 = [
+        {
+          values: [52, 40, 70, 120],
+          labels: ["Junary", "Febrary", "March", "April"],
+          type: "pie",
+
+          marker: {
+            color: "green",
+            opacity: 0.7,
+          },
+        },
+      ];
+
+      var usersChartLayout4 = {
+        xaxis: { title: "Months" },
+        yaxis: { title: "Users" },
+        barmode: "relative",
+        title: "Users Subscription Per Month",
+      };
+
+      Plotly.newPlot("usersPerMonth4", usersChartData4, usersChartLayout4);
+    </script>
+  </body>
+  <%- include('partials/footer') %>
+</html>

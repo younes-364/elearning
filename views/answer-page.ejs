@@ -1,0 +1,121 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+</head>
+
+<body>
+
+    <!--navbar-->
+
+    <%- include('partials/navbar') %>
+
+    <% if(answers.length == 0){%>
+        <h1 class="text-center font-italic mt-5">
+            You Didn't Pass Any Exam Yet.
+        </h1>
+        <% console.log(answers);%>
+    <%}else{%>
+
+        <h1 class="text-uppercase text-center mt-5 font-italic font-weight-light">Result Of Examen You Passed</h1>
+
+        <div class="container mt-3 mb-5">
+    
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Question N°</th>
+                        <th scope="col">Question</th>
+                        <th scope="col">User N°</th>
+                        <th scope="col">Your Answer</th>
+                        <th scope="col">T/F</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% answers.forEach(function(ans){ %>
+                        <tr>
+                            <th scope="row"><%= ans.ANSWER_QUESTION %></th>
+                            <th scope="row"><%= ans.QUESTION_TEXT %></th>
+                            <th scope="row"><%= ans.CHAMP_USER %></th>
+                            <th scope="row"><%= ans.CANDIDAT_CHOICE %></th>
+    
+                            <% if(ans.CHOICE_FILTER == 0){ %>
+                                <th scope="row" class="text-danger">FALSE</th>
+                                <% cmp++ %>
+                            <%}else{%>
+                                <th scope="row" class="text-success">TRUE</th>
+                                <% cpt++ %>
+                            <%}%>
+                           
+                        </tr>
+                    <%});%>
+                </tbody>
+            </table>
+    
+            <h1 class="text-uppercase mt-3 mb-3 text-center font-italic font-weight-light">Your Examen points</h1>
+    
+            <!--table result note-->
+            <%var i=0;%>
+            <table class="table table-bordered table-light">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Numer Of Questions</th>
+                    <th scope="col">You Answer On</th>
+                    <th scope="col">Numer Of Questions True</th>
+                    <th scope="col">Numer Of Questions false</th>
+                    <th scope="col">Final Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">30</th>
+                    <td><%= cpt + cmp %></td>
+                    <td><%= cpt %></td>
+                    <td><%= cmp %></td>
+                    <% if(answers.length == 0){%>
+                        <td></td>
+                    <%}else if(cpt >= (30/2)){%>
+                        <td class="text-success text-uppercase "> <h5>Success</h5></td>
+                        <% i = 1;%> 
+                    <%}else{%>
+                        <td class="text-danger text-uppercase "> <h5>Failed</h5></td>
+                        <% i = 2;%>
+                    <%}%>     
+                  </tr>
+                </tbody>
+              </table>
+    
+            
+              <% if(i == 1){ %>
+                <div class="card">
+                    <div class="card-body text-success font-italic text-uppercase">
+                     <strong> Congratulations You Passed The Examen Successfaally 
+                      Now you Can Pass to The next Chapter.
+                      Congratulations!!!! </strong>
+                    </div>
+                  </div>
+             <% }else if(i == 2){ %>
+                <div class="card shadow rounded">
+                    <div class="card-body text-danger font-italic text-uppercase">
+                    <strong> Don't Worry About This Failed It's The First
+                     Time And you Can Pass The Exam An Other Time
+                     But Please It's The Last One Be Sure You Prepare 
+                     Your Exam To <span class="text-success">Success</span>. </strong> 
+                    </div>
+                  </div>
+              <% }else{ %>
+    
+              <%}%>
+    
+        </div>
+
+    <%}%>
+
+    <%- include('partials/javascript') %>
+</body>
+<%- include('partials/footer') %>
+
+</html>

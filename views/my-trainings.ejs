@@ -1,0 +1,74 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+
+    <style>
+      body{
+        background-image: url(/images/bk62.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+</head>
+
+<body>
+    <!--nav bar-->
+    <%- include('partials/navbar') %>
+
+    <%if(subscription.length ==0){%>
+      <h1 class="text-white text-center mt-5">You Don't Have Any Training</h1>
+    <%}else{%>
+
+      <div class="container mb-5 mt-5">
+
+        <h2 class="text-black text-white text-center font-italic  pb-3 text-uppercase">
+            Table Present All Trainings You Subscribe in Them
+          </h2>
+
+        <div class="row">
+     
+            <!--table-->
+            <div class="clo col-12">
+      
+              <table class="table table-light table-striped">
+                <thead class="thead thead-dark">
+                  <tr>
+                    <th scope="col">Training N°</th>
+                    <th scope="col">User N°</th>
+                    <th scope="col">Training</th>
+                    <th scope="col">Date Subscription</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% subscription.forEach(function(sub){ %>
+                  <tr>
+                    <th> <%= sub.SUBSCRIPTION_ID %> </th>
+                    <th> <%= sub.SUBSCRIPTION_USER %> </th>
+                    <th> <%= sub.TRAINING_TITLE %> </th>
+                    <th> <%= sub.SUBSCRIPTION_DATETIME %> </th>
+                    <th class="table-success"><a type="button" class="badge badge-primary"
+                        href="/training-details/<%= sub.TRAINING_ID %>/<%= id_user %>">Suivre</button> </th>
+                  </tr>
+                  <%});%>
+      
+                </tbody>
+              </table>
+      
+            </div>
+      
+          </div>
+
+      </div>
+    <%}%>
+    
+
+      <%- include('partials/javascript') %>
+</body>
+<%- include('partials/footer') %>
+</html>

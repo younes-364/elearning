@@ -1,0 +1,175 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <!--code timeOut of exam-->
+
+    <!--part time of exam-->
+
+    <% if(dataExam.length == 0){ %>
+    <h3 class="text-center font-italic mt-5">
+      There Is no question in this Training
+    </h3>
+    <%}else{%>
+
+    <h3 class="text-center mt-5 font-italic">
+      CCNA 200-125 Final Exam (Routing & Switching)
+    </h3>
+
+    <div class="row">
+      <div class="col-4 mt-5">
+        <div class="card shadow rounded ml-5">
+          <div class="card-body text-center font-italic">
+            <span class="text-danger"> NB: </span> You have just One Hour to
+            finish the exam Please use your time and DO IT.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4"></div>
+      <div class="col-3 mt-5">
+        <div class="card shadow">
+          <div class="card-body rounded text-center font-italic">
+            Times UP :
+            <h5 class="mt-2">
+              <div id="demo"></div>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <form action="/manageAnswer/" method="POST">
+        <!--userid and training id-->
+        <input type="hidden" name="user_id" value="<%= id_user %>" />
+        <input type="hidden" name="tra_id" value="<%= tra_id %>" />
+
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header bg-success" id="headingOne">
+              <h2 class="mb-0">
+                <button
+                  class="
+                    btn btn-link btn-block
+                    text-center
+                    font-italic
+                    text-uppercase text-white
+                  "
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Exam Final Questions
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseOne"
+              class="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <% dataExam.forEach(function(que){ %>
+
+                  <li class="list-group-item active">
+                    <input
+                      type="text"
+                      class="col-sm-11 bg-primary text-light border-0"
+                      name="questionText"
+                      readonly
+                      value="<%= que.QUESTION_TEXT  %>"
+                    />
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input
+                        type="radio"
+                        name="choice_<%=que.QUESTION_ID%>"
+                        value="<%= que.QUESTION_FIRST_CHOICE %>"
+                      />
+                      <%= que.QUESTION_FIRST_CHOICE %>
+                    </label>
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input
+                        type="radio"
+                        name="choice_<%=que.QUESTION_ID%>"
+                        value="<%= que.QUESTION_SECOND_CHOICE %>"
+                      />
+                      <%= que.QUESTION_SECOND_CHOICE %>
+                    </label>
+                  </li>
+                  <li class="list-group-item">
+                    <label>
+                      <input
+                        type="radio"
+                        name="choice_<%=que.QUESTION_ID%>"
+                        value="<%= que.QUESTION_THIRD_CHOICE %>"
+                      />
+                      <%= que.QUESTION_THIRD_CHOICE %>
+                    </label>
+                  </li>
+                  <%});%>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input
+          type="submit"
+          value="Finish"
+          class="btn-success border border-info form-control"
+        />
+      </form>
+    </div>
+
+    <%}%> <%- include('partials/javascript') %>
+
+    <script>
+      var sec = 0;
+      var min = 0;
+      var hour = 0;
+      setInterval(() => {
+        sec++;
+        console.log(sec);
+        document.getElementById("demo").innerHTML =
+          hour + " : " + min + " : " + sec;
+        if (sec == 59) {
+          min++;
+          sec = 0;
+        }
+        if (min == 59) {
+          hour++;
+          min = 0;
+          sec = 0;
+        }
+
+        if (hour == 1) {
+          window.location.href =
+            "/training-details/<%= tra_id %>/<%= id_user %>";
+        }
+      }, 1000);
+    </script>
+  </body>
+
+  <%- include('partials/footer') %>
+</html>

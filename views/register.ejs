@@ -1,0 +1,171 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+    <style>
+      body {
+        background-image: url(/images/bk7.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--nav bar-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link fas fa-home" href="/">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <br />
+
+    <!--form subscrieb -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <!--content -->
+        </div>
+
+        <div class="col-6">
+          <!--form register-->
+
+          <div
+            class="card shadow rounded-0"
+            style="width: 40rem; background-color: rgba(900, 500, 300, 0.5)"
+          >
+            <div class="card-header bg-primary text-center">
+              <h5 class="card-title">Subscribe In PlatForme Elearning</h5>
+            </div>
+            <form action="/add-user" method="POST">
+              <div class="row">
+                <div class="col-12">
+                  <br />
+                  <% if(message != null){ %>
+                  <div class="alert-success fas fa-exclamation-circle">
+                    <%= message %>
+                  </div>
+                  <%}%> <% if(error2 != null){ %>
+                  <div class="alert-danger fas fa-exclamation-circle">
+                    <%= error2 %>
+                  </div>
+                  <%}%> <%if(errors != null ){ %>
+                  <br />
+                  <div class="alert-warning fas fa-exclamation-triangle">
+                    <%= errors %>
+                  </div>
+                  <%}%>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control border border-info"
+                      id="inputAddress"
+                      name="firstName"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <br />
+                  <div class="form-group col-md-6">
+                    <label for="inputAddress">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control border border-info"
+                      id="inputEmail4"
+                      name="lastName"
+                      placeholder="Last Name"
+                    />
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input
+                      type="email"
+                      class="form-control border border-info"
+                      id="inputEmail4"
+                      name="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input
+                      type="password"
+                      class="form-control border border-info"
+                      id="inputPassword4"
+                      name="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputText">Select Country</label>
+                    <select
+                      id="inputState"
+                      class="form-control border border-info"
+                      name="country"
+                    >
+                      <option value="Maroc">MAROC</option>
+                      <option value="France">FRANCE</option>
+                      <option value="Bresil">BRESIL</option>
+                      <option value="US">US</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="inputText">Select Level</label>
+                    <select
+                      id="inputState"
+                      class="form-control border border-info"
+                      name="technicalLevel"
+                    >
+                      <option value="basicLevel">BASIC LEVEL</option>
+                      <option value="mediumLevel">MEDIUM LEVEL</option>
+                      <option value="expertLevel">EXPERT LEVEL</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-success">
+                    REGISTER
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript') %>
+  </body>
+</html>

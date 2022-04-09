@@ -1,0 +1,67 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <%- include('partials/stylesheet') %>
+  </head>
+  <body>
+    <!--navbar-->
+    <%- include('partials/navbarAdmin') %>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow rounded text-center mt-5 mb-5">
+            <div class="card header">Update Module</div>
+
+            <div class="card-body">
+              <form action="/update-module" method="POST">
+                <div class="form-group">
+                  <input
+                    type="hidden"
+                    name="moduleId"
+                    value="<%= dataModule[0].MODULE_ID %>"
+                  />
+
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    value="<%= dataModule[0].MODULE_TITLE %>"
+                    name="moduleTitle"
+                    placeholder="TRAININ TITLE"
+                  />
+
+                  <textarea
+                    class="form-control mb-3"
+                    rows="4"
+                    name="moduleDescription"
+                    placeholder="Module DESCRIPTION"
+                  >
+                                    <%= dataModule[0].MODULE_DESCRIPTION %>
+                                </textarea
+                  >
+
+                  <input
+                    class="form-control mb-3"
+                    type="number"
+                    name="modulePrice"
+                    value="<%= dataModule[0].MODULE_PRICE %>"
+                  />
+
+                  <input
+                    class="btn btn-primary rounded"
+                    type="submit"
+                    value="Update Module"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/javascript')%>
+  </body>
+</html>
