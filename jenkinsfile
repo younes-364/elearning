@@ -10,6 +10,9 @@ pipeline {
   stages {
 
     stage('Checkout Source') {
+      environment {
+               registryCredential = 'githublogin'
+      }
       steps {
         git 'https://github.com/younes-364/elearning.git'
       }
