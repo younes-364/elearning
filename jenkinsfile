@@ -19,6 +19,9 @@ pipeline {
     }
 
     stage('Build image') {
+      environment {
+               registryCredential = 'githublogin'
+      }
       steps{
         script {
           dockerImage = docker.build dockerimagename
