@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
-  namespace : elearning-app
+  name: mysql-service
 spec:
   ports:
   - port: 3306
@@ -22,6 +21,7 @@ spec:
     type: Recreate
   template:
     metadata:
+      namespace : elearning-app
       labels:
         app: mysql
     spec:

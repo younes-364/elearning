@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodeapp-deployment
+  namespace : elearning-app
   labels:
     app: nodeapp
 spec:
@@ -27,7 +28,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nodeapp-service
-  namespace: elearning-app
 spec:
   selector:
     app: nodeapp 
