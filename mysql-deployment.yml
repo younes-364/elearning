@@ -21,7 +21,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      namespace : elearning-app
       labels:
         app: mysql
     spec:
