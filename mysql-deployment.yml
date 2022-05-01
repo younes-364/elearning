@@ -7,7 +7,7 @@ spec:
   - port: 3306
   selector:
     app: mysql
-  clusterIP: 192.168.100.19
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
