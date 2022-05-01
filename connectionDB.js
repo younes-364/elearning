@@ -5,7 +5,7 @@ var connectionParams = {
   host: "192.168.100.19",
   port: 3306,
   user: "root",
-  password: "LZNfes1999/",
+  password: "rootroot",
   database: "test_from_scratch",
 };
 
