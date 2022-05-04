@@ -22,7 +22,7 @@ var testLog = function (req, rep) {
         connection.query(selectAllUsers, queryParams, function (err, result) {
           if (err) console.log("eror query select users");
           else {
-            //console.log(result);
+            console.log(result);
             if (result.length == 0) {
               req.flash("error", "User Not Found");
               rep.render("login", { errors: req.flash().error, error2: null });

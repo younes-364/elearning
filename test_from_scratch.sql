@@ -1,3 +1,4 @@
+
 use test_from_scratch;
 
 /***************************************  TABLES ************************************************/
@@ -18,10 +19,19 @@ create table USERS(
        primary key(USER_ID)
 );
 
+-- admin table
+create table ADMIN(
+	ADMIN_ID integer auto_increment,
+    ADMIN_USER integer ,
+    
+    primary key (ADMIN_ID),
+    foreign key (ADMIN_USER) references USERS(USER_ID)
+);
+
 -- training table
 create table TRAINING(
         TRAINING_ID INTEGER AUTO_INCREMENT,
-		TRAINING_TITLE varchar(20),
+		TRAINING_TITLE varchar(100),
         TRAINING_DESCRIPTION VARCHAR(255),
         
         primary key (TRAINING_ID)
@@ -31,7 +41,7 @@ create table TRAINING(
 create table MODULE(
         MODULE_ID INTEGER AUTO_INCREMENT,
         MODULE_TRAINING INTEGER ,
-		MODULE_TITLE varchar(20),
+		MODULE_TITLE varchar(100),
         MODULE_DESCRIPTION VARCHAR(255),
         MODULE_PRICE FLOAT,
 
@@ -53,7 +63,7 @@ create table QUESTION(
         primary key (QUESTION_ID),
         foreign key (QUESTION_MODULE) REFERENCES MODULE(MODULE_ID)
         
-);
+); 
 
 -- subscription table
 create table SUBSCRIPTION(
@@ -68,6 +78,8 @@ create table SUBSCRIPTION(
         
 );
 
+
+
 -- capsule table
 create table CAPSULE(
 		
@@ -75,9 +87,11 @@ create table CAPSULE(
         CAPSULE_MODULE INTEGER,
         CAPSULE_URL varchar(255) ,
         CAPSULE_HAS_BEEN_SEEN BOOLEAN DEFAULT FALSE ,
+        CAPSULE_SUBSCRIPTION INTEGER,
         
         primary key (CAPSULE_ID),
-        foreign key (CAPSULE_MODULE) REFERENCES MODULE(MODULE_ID)
+        foreign key (CAPSULE_MODULE) REFERENCES MODULE(MODULE_ID),
+        foreign key (CAPSULE_SUBSCRIPTION) REFERENCES SUBSCRIPTION(SUBSCRIPTION_ID)
         
         
 );
@@ -98,12 +112,11 @@ create table ANSWER (
 	
 );
 
-ALTER TABLE CAPSULE ADD COLUMN CAPSULE_SUBSCRIPTION INTEGER ;
-
-alter table CAPSULE add foreign key (CAPSULE_SUBSCRIPTION) references SUBSCRIPTION(SUBSCRIPTION_ID );
-
-
 /***************************************  VIEWS ************************************************/
+-- view user admin
+create view adminUser as 
+select * from ADMIN 
+inner join USERS on user_id = admin_user ;
 
 -- capsulemodule
 create view capsuleModules as
@@ -138,9 +151,6 @@ select * from SUBSCRIPTION
 inner join TRAINING on TRAINING_ID = SUBSCRIPTION_TRAINING
 inner join USERS on USER_ID = SUBSCRIPTION_USER ;
 
--- delete
--- delete from question where question_id between 1 and 78;
-
 
 /* 30 Exam Questions*/
 CREATE VIEW EXAM_QUESTIONS AS
@@ -150,7 +160,6 @@ UNION
 UNION
 (SELECT * FROM QUESTION INNER JOIN MODULE ON MODULE_ID = QUESTION_MODULE WHERE QUESTION_HARDNESS_LEVEL = 'HEIGH' AND MODULE_TRAINING = 3 order by RAND() LIMIT 10);
 
-SELECT * FROM EXAM_QUESTIONS;
 
 
 /******************************************insertion query ********************************************************/
@@ -177,3 +186,36 @@ INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `Q
 INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('29', '1', 'Which statement accurately describes a TCP/IP encapsulation process when a PC is sending data to the network?', 'Data is sent from the internet layer to the network access layer', 'Segments are sent from the transport layer to the internet layer', 'Packets are sent from the network access layer to the transport layer', 'Segments are sent from the transport layer to the internet layer', 'HEIGH');
 INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('30', '1', 'What unique address is embedded in an Ethernet NIC and used for communication on an Ethernet network?', 'host address', 'IP address', 'MAC address', 'MAC address', 'HEIGH');
 
+
+
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('31', '2', 'Which type of static route is configured with a greater administrative distance to provide a backup route to a route learned from a dynamic routing protocol?', 'floating static route', 'default static route', 'summary static route', 'floating static route', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('32', '2', 'What network prefix and prefix-length combination is used to create a default static route that will match any IPv6 destination?', 'FFFF:/128', '::1/64', '::/0', '::/0', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('33', '2', ' A router has used the OSPF protocol to learn a route to the 172.16.32.0/19 network. Which command will implement a backup floating static route to this network?', 'ip route 172.16.32.0 255.255.224.0 S0/0/0 200', 'ip route 172.16.0.0 255.255.224.0 S0/0/0 100', 'ip route 172.16.32.0 255.255.0.0 S0/0/0 100', 'ip route 172.16.32.0 255.255.224.0 S0/0/0 200', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('34', '2', 'Which statement describes a route that has been learned dynamically?', 'It is automatically updated and maintained by routing protocols', 'It is unaffected by changes in the topology of the network', 'It has an administrative distance of 1', 'It is automatically updated and maintained by routing protocols', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('35', '2', 'Which route will a router use to forward an IPv4 packet after examining its routing table for the best match with the destination address?', 'a level 1 child route', 'a level 1 parent route', 'a level 1 ultimate route', 'a level 1 ultimate route', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('36', '2', 'What is a basic function of the Cisco Borderless Architecture access layer?', 'aggregates Layer 2 broadcast domains', 'aggregates Layer 3 routing boundaries', 'provides access to the user', 'provides access to the user', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('37', '2', 'What is a characteristic of the distribution layer in the three layer hierarchical model?', 'provides access to the rest of the network through switching, routing, and network access policies', 'distributes access to end users', 'represents the network edge', 'provides access to the rest of the network through switching, routing, and network access policies', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('38', '2', 'Which information does a switch use to populate the MAC address table?', 'the destination MAC address and the incoming port', 'the destination MAC address and the outgoing port', 'the source MAC address and the incoming port', 'the source MAC address and the incoming port', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('39', '2', ' Which statement is correct about Ethernet switch frame forwarding decisions?', 'Unicast frames are always forwarded regardless of the destination MAC address', 'Frame forwarding decisions are based on MAC address and port mappings in the CAM table', 'Cut-through frame forwarding ensures that invalid frames are always dropped', 'Frame forwarding decisions are based on MAC address and port mappings in the CAM table', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('40', '2', 'What is the name of the layer in the Cisco borderless switched network design that would have more switches deployed than other layers?', 'access', 'core', 'data link', 'access', 'LOW');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('41', '2', 'Which switching method drops frames that fail the FCS check?', 'borderless switching', 'cut-through switching', 'store-and-forward switching', 'store-and-forward switching', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('42', '2', 'In what situation would a Layer 2 switch have an IP address configured?', 'when the Layer 2 switch needs to be remotely managed', 'when the Layer 2 switch is the default gateway of user traffic', 'when the Layer 2 switch needs to forward user traffic to another device', 'when the Layer 2 switch needs to be remotely managed', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('43', '2', ' A network administrator is configuring port security on a Cisco switch. When a violation occurs, which violation mode that is configured on an interface will cause  sent?', 'protect', 'restrict', 'shutdown', 'protect', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('44', '2', 'What will a Cisco LAN switch do if it receives an incoming frame and the destination MAC address is not listed in the MAC address table?', 'Use ARP to resolve the port that is related to the frame', 'Forward the frame out all ports except the port where the frame is received', 'Use ARP to resolve the port that is related to the frame', 'Forward the frame out all ports except the port where the frame is received', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('45', '2', 'What VLANs are allowed across a trunk when the range of allowed VLANs is set to the default value?', 'Only the native VLAN will be allowed across the trunk', 'Only VLAN 1 will be allowed across the trunk', 'All VLANs will be allowed across the trunk', 'All VLANs will be allowed across the trunk', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('46', '2', 'Which type of traffic would most likely have problems when passing through a NAT device?', 'IPsec', 'HTTP', 'ICMP', 'IPsec', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('47', '2', 'A network engineer is interested in obtaining specific information relevant to the operation of both distribution and access layer Cisco devices. Wt to both types of devices?', 'show port-security', 'show cdp neighbors', 'show mac-address-table', 'show cdp neighbors', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('48', '2', ' Refer to the exhibit. An administrator is examining the message in a syslog server. What can be determined from the message?', 'This is a notification message for a normal but significant condition', 'This is an error message for which warning conditions exist', 'This is an alert message for which immediate action is needed', 'This is a notification message for a normal but significant condition', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('49', '2', 'When a customer purchases a Cisco IOS 15.0 software package, what serves as the receipt for that customer and is used to obtain the license as well?', 'Product Activation Key', 'End User License Agreement', 'Unique Device Identifier', 'Product Activation Key', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('50', '2', ' What benefit does NAT64 provide?', 'It allows sites to connect IPv6 hosts to an IPv4 network by translating the IPv6 addresses to IPv4 addresses', 'It allows sites to use private IPv6 addresses and translates them to global IPv6 addresses', 'It allows sites to use private IPv4 addresses, and thus hides the internal addressing structure from hosts on rks', 'It allows sites to connect IPv6 hosts to an IPv4 network by translating the IPv6 addresses to IPv4 addresses', 'MEDIUM');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('51', '2', 'What is the effect of configuring the ipv6 unicast-routing command on a router?', 'to assign the router to the all-nodes multicast group', 'to enable the router as an IPv6 router', 'to permit only unicast packets on the router', 'to enable the router as an IPv6 router', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('52', '2', 'What is a characteristic of a static route that creates a gateway of last resort?', 'It identifies the gateway IP address to which the router sends all IP packets for which it does not have a learned or static route', 'It backs up a route already discovered by a dynamic routing protocol', 'It is configured with a higher administrative distance than the original dynamic routing protocol has', 'It identifies the gateway IP address to which the router sends all IP packets for which it does not have a learned or static route', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('53', '2', 'Which network design may be recommended for a small campus site that consists of a single building with a few users?', 'a three-tier campus network design where the access, distribution, and core are all separate layers, each one with very specific functions', 'a collapsed core network design', 'a network design where the access and distribution layers are collapsed into a single layer', 'a collapsed core network design', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('54', '2', 'Which information does a switch use to keep the MAC address table information current?', 'the source MAC address and the incoming port', 'the destination MAC address and the incoming port', 'the source and destination MAC addresses and the incoming port', 'the source MAC address and the incoming port', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('55', '2', ' Which advantage does the store-and-forward switching method have compared with the cut-through switching method?', 'frame error checking', 'faster frame forwarding', 'collision detecting', 'frame error checking', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('56', '2', 'Which characteristic describes cut-through switching?', 'Error-free fragments are forwarded, so switching accurs with lower latency', 'Only outgoing frames are checked for errors', 'Frames are forwarded without any error checking', 'Frames are forwarded without any error checking', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('57', '2', ' What is a result of connecting two or more switches together?', 'The number of broadcast domains is increased', 'The size of the broadcast domain is increased', 'The number of collision domains is reduced', 'The size of the broadcast domain is increased', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('58', '2', ' Which commands are used to re-enable a port that has been disabled as a result of a port security violation?', 'shutdown', 'no switchport port-security', 'no switchport port-security violation shutdown', 'no switchport port-security violation shutdown', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('59', '2', 'Which type of traffic is designed for a native VLAN?', 'management', 'user-generated', 'user-generated', 'user-generated', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_ID`, `QUESTION_MODULE`, `QUESTION_TEXT`, `QUESTION_FIRST_CHOICE`, `QUESTION_SECOND_CHOICE`, `QUESTION_THIRD_CHOICE`, `QUESTION_CORRECT_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('60', '2', ' A network administrator is verifying a configuration that involves network monitoring. What is the purpose of the global configuration command logging trap 4?', 'System messages that match logging levels 0-4 will be forwarded to a specified logging device', 'System messages that exist in levels 4-7 must be forwarded to a specific logging server', 'System messages will be forwarded using a SNMP version that matches the argument that follows the logging trap command', 'System messages that match logging levels 0-4 will be forwarded to a specified logging device', 'HEIGH');
+INSERT INTO `test_from_scratch`.`QUESTION` (`QUESTION_FIRST_CHOICE`, `QUESTION_HARDNESS_LEVEL`) VALUES ('', '');
