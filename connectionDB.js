@@ -3,7 +3,7 @@ var mysql = require("mysql2");
 
 var connectionParams = {
   host: "192.168.100.19",
-  port: 3306,
+  port: 31898,
   user: "root",
   password: "rootroot",
   database: "test_from_scratch",
