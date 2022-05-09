@@ -83,7 +83,7 @@ elearningApp.use(express.static("public"));
 elearningApp.set("view engine", "ejs");
 
 //serevr express
-server.listen(8081, "0.0.0.0", function () {
+server.listen(80, "0.0.0.0", function () {
   console.log(server.address().address);
   console.log(server.address().port);
 });

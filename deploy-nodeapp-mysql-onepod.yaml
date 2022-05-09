@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment1
+  labels:
+	app: nodeapp
+spec:
+  replicas: 3
+  selector:
+    matchlabels:
+      app: nodeapp
+template:
+  metadata:
+    labels:
+      app: nodeapp
+  spec:
+    containers:
+    - name: nodeserver
+        image: 13694568/nodeapp:latest
+        ports:
+        - containerPort: 80
+    - name: database-server
+	  - image: mysql:5.6
+        name: mysql
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: rootroot
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+
+------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: nodeapp 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 8081
+    nodePort: 31110
+
+-----------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  type: LoadBalancer
