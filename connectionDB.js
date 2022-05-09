@@ -2,7 +2,7 @@ var mysql = require("mysql2");
 //connection to database mysql
 
 var connectionParams = {
-  host: "192.168.100.19",
+  host: "k8s-master01.cgiprod.ma",
   port: 31898,
   user: "root",
   password: "rootroot",
