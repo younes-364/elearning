@@ -14,12 +14,12 @@ spec:
       labels:
         app: nodeapp 
     spec:
-    containers:
-    - name: webserver1
-	    image: 13694568/nodeapp:latest
-	    ports:
- 	    - containerPort: 80
-    - name: database-server
-	    image: mysql:5.6
-	    ports:
- 	    - containerPort: 3306
+      containers:
+      - name: webserver1
+	      image: 13694568/nodeapp:latest
+	      ports:
+ 	      - containerPort: 80
+      - name: database-server
+	      image: mysql:5.6
+	      ports:
+ 	      - containerPort: 3306
