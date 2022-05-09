@@ -15,8 +15,8 @@ spec:
         app: nodeapp 
     spec:
       containers:
-      - name: webserver1
-	      image: 13694568/nodeapp:latest
+      - name: nodeserver
+        image: 13694568/nodeapp:latest
 	      ports:
  	      - containerPort: 80
       - name: database-server
