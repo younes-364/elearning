@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: nodeapp
   labels:
     app: nodeapp
 spec:
@@ -11,8 +11,8 @@ spec:
       app: nodeapp
   template:
     metadata:
-      abels:
-        app: nodeapp
+      labels:
+        app: nodeapp 
     spec:
     containers:
     - name: nodeserver
