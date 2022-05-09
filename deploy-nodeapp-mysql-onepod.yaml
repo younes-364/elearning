@@ -5,15 +5,15 @@ metadata:
   labels:
     app: nodeapp
 spec:
-  replicas: 3
+ replicas: 3
   selector:
-    matchlabels:
+    matchLabels:
       app: nodeapp
-template:
-  metadata:
-    labels:
-      app: nodeapp
-  spec:
+  template:
+    metadata:
+      labels:
+        app: nodeapp 
+    spec:
     containers:
     - name: webserver1
 	  image: 13694568/nodeapp:latest
