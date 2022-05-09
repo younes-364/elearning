@@ -21,9 +21,11 @@ spec:
       - containerPort: 80
     - name: database-server
       image: mysql:5.6
+      env:
+      - name: MYSQL_ROOT_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: MYSQL_ROOT_PASSWORD
+            name: mysql-pass
             key: rootroot
       ports:
       - containerPort: 3306
