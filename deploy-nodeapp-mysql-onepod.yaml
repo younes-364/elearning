@@ -3,11 +3,11 @@ kind: Deployment
 metadata:
   name: nodeapp-deployment
   labels:
-	  app: nodeapp
+    app: nodeapp
 spec:
   replicas: 3
   selector:
-    matchlabels:
+    matchLabels:
       app: nodeapp
   template:
     metadata:
